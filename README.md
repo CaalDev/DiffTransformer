@@ -1,6 +1,97 @@
-# DiffTransformer
 # Differential Transformer for Hallucination Mitigation
 
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1AN4GwY19-fQUqQvBwzcWgXdAqkF2sh-P/view?usp=drive_link)
+
+Academic project that implements and evaluates the **differential attention** mechanism (Differential Attention) proposed in the paper:
+
+> **"Differential Transformer"** — Ye et al., 2024
+> Paper: https://arxiv.org/abs/2410.05258
+
+This work demonstrates how differential attention reduces the allocation of attention to irrelevant context ("noise") and mitigates hallucinations in *question answering* tasks with long contexts.
+
+---
+
+### Team
+- Maria Liliana Parra Osorno
+- Daniel Castañeda Montenegro
+- Carlos Andrés Aguirre López
+
+**Professor:** Alcides Montoya Cañola
+**Universidad Nacional de Colombia - Medellín**
+**November 2025**
+
+---
+
+### Objective
+Implement and compare the **Differential Transformer** against the standard Transformer, evaluating:
+- Reduction of hallucinations in QA tasks
+- Better handling of long contexts
+- Emergence of more sparse and focused attention patterns
+- Decrease in activation outliers
+
+---
+
+### Key Concept: Differential Attention
+
+> It's like **noise-canceling headphones**
+
+```math
+\text{DiffAttn}(Q,K,V) = \left( \text{softmax}\left(\frac{Q_1 K_1^T}{\sqrt{d}}\right) - \lambda \cdot \text{softmax}\left(\frac{Q_2 K_2^T}{\sqrt{d}}\right) \right) V
+````
+- First Term: Captures signal + noise
+- Second Term: Captures primarily noise
+- $\lambda$ (learnable): Controls the cancellation intensity
+- Result: The relevant signal is amplified and noise is suppressed
+
+# 📑 Thesis Project Structure: Differential Transformer
+
+This outline details a robust and experimental approach for hallucination mitigation in language models using the **Differential Attention (DiffAttn)** mechanism.
+
+| Section | Title | Key Content |
+| :--- | :--- | :--- |
+| **1.** | **Introduction and Objectives** | Context of the hallucination problem in LLMs, relevance of mitigation, and presentation of the specific project objectives. |
+| **2.** | **Theoretical Framework** | Fundamentals of the **Standard Attention (Transformer)** mechanism and the theoretical justification of the **Differential Attention (DiffAttn)** mechanism as a noise and bias filter. |
+| **3.** | **Environment Setup** | Details of the hardware infrastructure (e.g., use of **A100 GPU**), framework versions (**PyTorch/TensorFlow**), and development environment configuration. |
+| **4.** | **Standard Attention (Baseline)** | Implementation of a **Standard Transformer (Baseline)** model and description of the initial dataset to establish the performance metric to be surpassed. |
+| **5.** | **Differential Attention (DiffAttn)** | Implementation and technical details of the **DiffAttn** mechanism (including the two attention heads and the cancellation factor $\lambda$) within the Transformer model. |
+| **6.** | **Synthetic Experiments** | Design of controlled tests to evaluate the model's robustness to **explicit noise or contradictory inputs**, demonstrating the cancellation capability of $\lambda$. |
+| **7.** | **Visualization and Analysis** | Generation of comparative **Attention Maps** (Standard vs. Differential) to analyze **sparsity** and focus on relevant *tokens*. |
+| **8.** | **Long-Context Evaluation** | Comparison of the performance and stability (hallucination rate) of both models in scenarios of **long contexts** (*Long-Context Evaluation*). |
+| **9.** | **Outlier Analysis** | Quantification of the **reduction of extreme activations (outliers)** in the attention matrices and their correlation with hallucination mitigation. |
+| **10.** | **Evaluation Metrics** | Detail of the metrics used: **Exact Match (EM)** and **ROUGE** for fidelity, and specific metrics to measure **focused attention** and the hallucination rate. |
+| **11.** | **Conclusions and Future Work** | Summary of the key results, validation of the hypothesis, and proposal for future research directions (e.g., application to large-scale LLM models). |
+
+#Key Results (Preliminary)
+
+- Significant reduction of attention to irrelevant tokens
+- Decrease in hallucinations in contexts with distraction
+- More sparse and focused attention patterns
+- Lower presence of outliers in activations
+- Improved performance in "needle in a haystack" tasks with contexts >8k tokens
+
+# How to Run
+You can open directly in Google Colab: Open In Colab Or clone and run locally:
+
+git clone [https://github.com/tu-usuario/differential-transformer-dcm.git](https://github.com/tu-usuario/differential-transformer-dcm.git)
+cd differential-transformer-dcm
+jupyter notebook Differential_Transformer_DCM.ipynb
+
+pip install torch transformers datasets rouge-score matplotlib seaborn
+
+# Featured Visualizations
+<img width="1544" height="990" alt="image" src="https://github.com/user-attachments/assets/9315780b-4b25-4779-a901-24301cf42d85" /> Attention Map: Standard Transformer (left) vs. Differential Transformer (right)
+
+# License
+Universidad Nacional de Colombia - Sede Medellín Physics Department — Natural Language Processing with Transformers
+
+
+
+**********************************************************************
+
+# Differential Transformer para Mitigación de Alucinaciones
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange)
@@ -95,3 +186,5 @@ Mapa de atención: Transformer estándar (izq.) vs. Differential Transformer (de
 # Licencia
 Universidad Nacional de Colombia - Sede Medellín
 Departamento de Física — Procesamiento de Lenguaje Natural con Transformers
+
+
